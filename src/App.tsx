@@ -3,7 +3,7 @@ import "./App.scss";
 function App() {
   return (
     <>
-      <h1>Welcome to Opticode</h1>
+      <h1 className="welcome">Welcome to Opticode</h1>
     </>
   );
 }
