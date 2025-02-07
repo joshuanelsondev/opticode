@@ -1,8 +1,7 @@
-import { app, BrowserWindow } from "electron";
-import { createRequire } from "node:module";
+import { app, BrowserWindow, ipcMain } from "electron";
 import { fileURLToPath } from "node:url";
-import path from "node:path";
-createRequire(import.meta.url);
+import path from "path";
+import fs from "fs";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 process.env.APP_ROOT = path.join(__dirname, "..");
 const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
@@ -12,7 +11,8 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, 
 let win;
 function createWindow() {
   win = new BrowserWindow({
-    icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
+    width: 800,
+    height: 600,
     webPreferences: {
       preload: path.join(__dirname, "preload.mjs")
     }
@@ -38,6 +38,16 @@ app.on("activate", () => {
   }
 });
 app.whenReady().then(createWindow);
+const dataFile = path.join(app.getPath("userData"), "diagnosis.json");
+ipcMain.on("save-diagnosis", (event, data) => {
+  let diagnosisEntries = [];
+  if (fs.existsSync(dataFile)) {
+    diagnosisEntries = JSON.parse(fs.readFileSync(dataFile, "utf-8"));
+  }
+  diagnosisEntries.push(data);
+  fs.writeFileSync(dataFile, JSON.stringify(diagnosisEntries, null, 2));
+  event.reply("save-diagnosis-reply", "Diagnosis saved successfully");
+});
 export {
   MAIN_DIST,
   RENDERER_DIST,
