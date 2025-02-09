@@ -70,7 +70,8 @@ const ICD10Autocomplete = ({
         type="text"
         placeholder="Search Code..."
         value={query}
-        onChange={(e = setShowdropdown(true))}
+        onChange={(e) => setQuery(e.target.value)}
+        onFocus={() => setShowdropdown(true)}
       />
 
       {showDropdown && suggestions.length > 0 && (
