@@ -1,16 +1,24 @@
+import { useState } from "react";
 import "./App.scss";
+import ICD10Autocomplete from "./components/ICD10Autocomplete";
 
 function App() {
-  new Def.Autocompleter.Search(
-    "icd10",
-    "https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code,name",
-    { tableFormat: true, valueCols: [0], colHeaders: ["Code", "Name"] }
-  );
+  const [selectedCode, setSelectedCode] = useState("");
+
   return (
-    <>
-      <h1 className="welcome">Welcome to Opticode</h1>
-      <input type="text" id="icd10" placeholder="Enter code or name" />
-    </>
+    <div>
+      <h1>Code Lookup</h1>
+
+      {/* Autocomplete Component */}
+      <ICD10Autocomplete onSelect={(code) => setSelectedCode(code)} />
+
+      {/* Display Selected Code */}
+      {setSelectedCode && (
+        <div>
+          <strong>Selected Code:</strong> {selectedCode}
+        </div>
+      )}
+    </div>
   );
 }
 
