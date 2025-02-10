@@ -3,6 +3,8 @@ import axios from "axios";
 
 const API_URL = import.meta.env.VITE_ICD10_API_URL;
 
+const cache: { [query: string]: { code: string; description: string }[] } = {};
+
 const ICD10Autocomplete = ({
   onSelect,
 }: {
@@ -20,6 +22,11 @@ const ICD10Autocomplete = ({
     if (!query.trim()) {
       setSuggestions([]);
       return;
+    }
+
+    if (cache[query]) {
+      setSuggestions(cache[query]);
+      setShowDropdown(true);
     }
 
     const fetchData = async () => {
