@@ -6,7 +6,7 @@ function App() {
   const [selectedCode, setSelectedCode] = useState("");
 
   return (
-    <div>
+    <main>
       <h1>Code Lookup</h1>
 
       {/* Autocomplete Component */}
@@ -18,7 +18,7 @@ function App() {
           <strong>Selected Code:</strong> {selectedCode}
         </div>
       )}
-    </div>
+    </main>
   );
 }
 
