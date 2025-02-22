@@ -5,13 +5,15 @@ import fs from "fs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-process.env.APP_ROOT = path.join(__dirname, "..");
+const isDevelopment = import.meta.env.MODE === "development";
 
-export const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
-export const MAIN_DIST = path.join(process.env.APP_ROOT, "dist-electron");
+export const VITE_DEV_SERVER_URL = isDevelopment
+  ? import.meta.env.VITE_DEV_SERVER_URL
+  : undefined;
+export const MAIN_DIST = path.join(__dirname, "..");
 export const RENDERER_DIST = path.join(process.env.APP_ROOT, "dist");
 
-process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
+process.env.VITE_PUBLIC = isDevelopment
   ? path.join(process.env.APP_ROOT, "public")
   : RENDERER_DIST;
 
