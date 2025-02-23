@@ -3,11 +3,10 @@ import { fileURLToPath } from "node:url";
 import path from "path";
 import fs from "fs";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-process.env.APP_ROOT = path.join(__dirname, "..");
-const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
-const MAIN_DIST = path.join(process.env.APP_ROOT, "dist-electron");
+const VITE_DEV_SERVER_URL = "http://localhost:5173/";
+const MAIN_DIST = path.join(__dirname, "..");
 const RENDERER_DIST = path.join(process.env.APP_ROOT, "dist");
-process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, "public") : RENDERER_DIST;
+process.env.VITE_PUBLIC = path.join(process.env.APP_ROOT, "public");
 let win;
 function createWindow() {
   win = new BrowserWindow({
@@ -20,10 +19,8 @@ function createWindow() {
   win.webContents.on("did-finish-load", () => {
     win == null ? void 0 : win.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
   });
-  if (VITE_DEV_SERVER_URL) {
+  {
     win.loadURL(VITE_DEV_SERVER_URL);
-  } else {
-    win.loadFile(path.join(RENDERER_DIST, "index.html"));
   }
 }
 app.on("window-all-closed", () => {
