@@ -1,13 +1,11 @@
 import React from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Nav from "./Nav";
 
 export default function Layout() {
   return (
     <div>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/script-editor">Script Editor</Link>
-      </nav>
+      <Nav />
       <main>
         <Outlet />
       </main>
