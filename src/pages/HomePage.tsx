@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import ICD10Autocomplete from "@/components/ICD10Autocomplete";
 
@@ -7,13 +6,13 @@ export default function Home() {
 
   return (
     <main>
-      <h1>Code Lookup</h1>
+      <h3>Code Search:</h3>
 
       {/* Autocomplete Component */}
       <ICD10Autocomplete onSelect={(code) => setSelectedCode(code)} />
 
       {/* Display Selected Code */}
-      {setSelectedCode && (
+      {selectedCode && (
         <div>
           <strong>Selected Code:</strong> {selectedCode}
         </div>
