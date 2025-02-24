@@ -10,11 +10,13 @@ const isDevelopment = import.meta.env.MODE === "development";
 export const VITE_DEV_SERVER_URL = isDevelopment
   ? import.meta.env.VITE_DEV_SERVER_URL
   : undefined;
-export const MAIN_DIST = path.join(__dirname, "..");
-export const RENDERER_DIST = path.join(process.env.APP_ROOT, "dist");
+
+export const APP_ROOT = path.join(__dirname, "..");
+
+export const RENDERER_DIST = path.join(APP_ROOT, "dist");
 
 process.env.VITE_PUBLIC = isDevelopment
-  ? path.join(process.env.APP_ROOT, "public")
+  ? path.join(APP_ROOT, "public")
   : RENDERER_DIST;
 
 let win: BrowserWindow | null;

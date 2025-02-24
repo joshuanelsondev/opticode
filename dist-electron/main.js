@@ -4,9 +4,9 @@ import path from "path";
 import fs from "fs";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VITE_DEV_SERVER_URL = "http://localhost:5173/";
-const MAIN_DIST = path.join(__dirname, "..");
-const RENDERER_DIST = path.join(process.env.APP_ROOT, "dist");
-process.env.VITE_PUBLIC = path.join(process.env.APP_ROOT, "public");
+const APP_ROOT = path.join(__dirname, "..");
+const RENDERER_DIST = path.join(APP_ROOT, "dist");
+process.env.VITE_PUBLIC = path.join(APP_ROOT, "public");
 let win;
 function createWindow() {
   win = new BrowserWindow({
@@ -46,7 +46,7 @@ ipcMain.on("save-diagnosis", (event, data) => {
   event.reply("save-diagnosis-reply", "Diagnosis saved successfully");
 });
 export {
-  MAIN_DIST,
+  APP_ROOT,
   RENDERER_DIST,
   VITE_DEV_SERVER_URL
 };
