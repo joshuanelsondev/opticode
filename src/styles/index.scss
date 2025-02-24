@@ -1,0 +1,12 @@
+@use "./variables" as *;
+
+body {
+  margin: 0;
+  display: grid;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: $primary-font;
+  background-color: $white;
+}
+
