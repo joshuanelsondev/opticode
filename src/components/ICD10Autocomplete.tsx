@@ -14,7 +14,7 @@ const ICD10Autocomplete = ({
   const [suggestions, setSuggestions] = useState<
     { code: string; description: string }[]
   >([]);
-  const [showDropdown, setShowdropdown] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
   // Fetch ICD-10 suggestions based on user input
@@ -46,7 +46,7 @@ const ICD10Autocomplete = ({
             description,
           }))
         );
-        setShowDropodown(true);
+        setShowDropdown(true);
       } catch (error) {
         console.error("Error fetching ICD-10 data:", error);
       }
@@ -72,13 +72,15 @@ const ICD10Autocomplete = ({
   }, []);
 
   return (
-    <div ref={searchRef}>
+    <div className="code-search" ref={searchRef}>
+      <label htmlFor="codesearch">Code Search:</label>
       <input
         type="text"
+        id="codesearch"
         placeholder="Search Code..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        onFocus={() => setShowdropdown(true)}
+        onFocus={() => setShowDropdown(true)}
       />
 
       {showDropdown && suggestions.length > 0 && (
