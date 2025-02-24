@@ -1,5 +1,7 @@
 import { useState } from "react";
 import ICD10Autocomplete from "@/components/ICD10Autocomplete";
+import RecentCodes from "@/components/RecentCodes";
+import ScriptLibrary from "@/components/ScriptLibray";
 
 export default function Home() {
   const [selectedCode, setSelectedCode] = useState("");
@@ -17,6 +19,9 @@ export default function Home() {
           <strong>Selected Code:</strong> {selectedCode}
         </div>
       )}
+
+      <RecentCodes />
+      <ScriptLibrary />
     </main>
   );
 }

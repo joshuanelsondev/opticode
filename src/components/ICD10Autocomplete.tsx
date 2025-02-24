@@ -72,9 +72,11 @@ const ICD10Autocomplete = ({
   }, []);
 
   return (
-    <div ref={searchRef}>
+    <div className="code-search" ref={searchRef}>
+      <label htmlFor="codesearch">Code Search:</label>
       <input
         type="text"
+        id="codesearch"
         placeholder="Search Code..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
