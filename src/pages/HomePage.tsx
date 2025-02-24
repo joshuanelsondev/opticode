@@ -6,10 +6,10 @@ export default function Home() {
 
   return (
     <main>
-      <h3>Code Search:</h3>
-
       {/* Autocomplete Component */}
-      <ICD10Autocomplete onSelect={(code) => setSelectedCode(code)} />
+      <ICD10Autocomplete
+        onSelect={(selectedCode) => setSelectedCode(selectedCode)}
+      />
 
       {/* Display Selected Code */}
       {selectedCode && (
